@@ -21,13 +21,17 @@ def contact():
 @app.route('/animals')
 def animals():
     conn = database_functions.connection()
-    return render_template('animals.html')
+    all_animals=database_functions.get_all_animals(conn)
+    print(all_animals)
+    return render_template('animals.html', len=len(all_animals), all_animals=all_animals)
+
 @app.route('/sign_in')
 def sign_in():
     return render_template('sign_in.html')
 
+
 if __name__ == '__main__':
-    database_functions.create_table()
+    #database_functions.create_table()
     app.run(debug=True, port=8000)
 
 

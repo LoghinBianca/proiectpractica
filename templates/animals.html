@@ -13,6 +13,14 @@
     <li><a href="/about">About</a></li>
     <li><a href="/animals">Animals</a></li>
 </ul>
+<ol>
+<!-- For loop logic of jinja template -->
+{%for i in range(0, len)%}
+
+    <li>{{all_animals[i]}}</li>
+{%endfor%}
+
+</ol>
 <img src="static/images/logo.png" alt="Italian Trulli">
 
 </body>
