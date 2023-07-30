@@ -1,4 +1,5 @@
 import database_functions
+from flask import request
 from flask import Flask, render_template
 app = Flask(__name__)
 
@@ -29,6 +30,15 @@ def animals():
 def sign_in():
     return render_template('sign_in.html')
 
+
+@app.route('/sign_in_validate', methods = ['POST'])
+def sign_in_validate():
+    email=request.form.get('email')
+    psw=request.form.get('psw')
+    psw_repeat=request.form.get('psw-repeat')
+    print(email)
+    print(psw)
+    print(psw_repeat)
 
 if __name__ == '__main__':
     #database_functions.create_table()
