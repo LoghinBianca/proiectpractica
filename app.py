@@ -33,12 +33,33 @@ def sign_in():
 
 @app.route('/sign_in_validate', methods = ['POST'])
 def sign_in_validate():
+    conn = database_functions.connection()
     email=request.form.get('email')
     psw=request.form.get('psw')
     psw_repeat=request.form.get('psw-repeat')
-    print(email)
-    print(psw)
-    print(psw_repeat)
+    if database_functions.verify_sign_in(conn, email)==True:
+        database_functions.insert_in_clients(conn, email, psw)
+        return "Contul a fost creat!"
+    else:
+        return "Exista deja un utilizator cu acest email!"
+
+
+@app.route('/login')
+def log_in():
+    return render_template('login.html')
+
+@app.route('/log_in_validate', methods = ['POST'])
+def log_in_validate():
+    conn = database_functions.connection()
+    email=request.form.get('email')
+    psw=request.form.get('psw')
+    database_functions.verify_log_in(conn, email, psw)
+    if database_functions.verify_log_in(conn, email, psw)==True:
+        pass
+
+
+
+
 
 if __name__ == '__main__':
     #database_functions.create_table()
