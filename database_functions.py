@@ -63,3 +63,9 @@ def verify_log_in(conn, email, password):
     if len(data)!=0:
         return True
     return False
+
+def delete_by_id(conn, id):
+    sql = 'DELETE FROM PETSHOP WHERE ID=?'
+    cur = conn.cursor()
+    cur.execute(sql, (id,))
+    conn.commit()
